@@ -200,7 +200,7 @@ python3 <Workspace>/ICDAR2019/TFD-ICDAR2019v2/VisualizationTools/visualize_annot
 
 ```
 python3 <Workspace>/ICDAR2019/TFD-ICDAR2019v2/Evaluation/IOULib/IOUevaluater.py 
---ground_truth <Workspace>/ICDAR2019/TFD-ICDAR2019v2/Train/math_gt/ 
+--ground_truth <Workspace>/ICDAR2019/TFD-ICDAR2019v2/Test/gt/math_gt/ 
 --detections <Workspace>/ssd/eval/stitched_HBOXES512_e4/
 ```
 
