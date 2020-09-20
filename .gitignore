@@ -124,6 +124,7 @@ test_data_aug.py
 data/datasets/
 images/*
 data/ssd_dataloader.py
+ssd/models
 
 # pylint
 .pylintrc
