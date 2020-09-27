@@ -125,6 +125,7 @@ data/datasets/
 images/*
 data/ssd_dataloader.py
 ssd/models
+**/*.out
 
 # pylint
 .pylintrc
