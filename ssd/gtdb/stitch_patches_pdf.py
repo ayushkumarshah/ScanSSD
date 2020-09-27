@@ -15,6 +15,7 @@ from cv2.dnn import NMSBoxes
 from scipy.ndimage.measurements import label
 from gtdb import fit_box
 from gtdb import feature_extractor
+from utils.visualize import draw_all_boxes
 import argparse
 import shutil
 
@@ -65,6 +66,9 @@ def parse_args():
     )
     parser.add_argument(
         "--postprocess", type=bool, help="Whether to fit math regions after pooling"
+    )
+    parser.add_argument(
+        "--visualize", type=bool, help="Whether to save the stitched heatmaps"
     )
 
     return parser.parse_args()
@@ -219,6 +223,7 @@ def voting_algo(params):
     if args.preprocess:
         math_regions = preprocess_math_regions(math_regions, image)
 
+    math_regions_copy = np.copy(math_regions)
     # vote for the regions
     votes = vote_for_regions(args, math_regions, image)
 
@@ -255,6 +260,15 @@ def voting_algo(params):
 
         boxes.append(box)
 
+    if args.visualize:
+        output_image = os.path.join(
+            args.output_dir, pdf_name, str(int(page_num + 1)) + ".png"
+        )
+        if not os.path.exists(os.path.dirname(output_image)):
+            os.makedirs(os.path.dirname(output_image))
+        draw_all_boxes(
+            image, math_regions_copy, np.reshape(boxes, (-1, 4)), None, output_image
+        )
     return boxes
 
 
